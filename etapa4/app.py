@@ -266,7 +266,8 @@ st.pydeck_chart(deck)
 df_rio = pd.DataFrame({
     'local': ["Candelária", "São Bento", "Aeroporto", "Teatro"],
     'latitude': [-22.90049674395883, -22.896810496584695, -22.909174243762013, -22.908860278878034],
-    'longitude': [-43.17700158812346, -43.17742651959921, -43.16260433162997, -43.17599960142952]
+    'longitude': [-43.17700158812346, -43.17742651959921, -43.16260433162997, -43.17599960142952],
+    'valor': [100, 200, 300, 400]
     })
 print(df_rio)
 
@@ -276,11 +277,11 @@ rio_initial_view = pdk.ViewState(latitude=df_rio.loc[1,'latitude'], longitude=df
     bearing=100
 )
 
-layer1 = pdk.Layer("ScatterplotLayer", data=df_rio, get_position=["longitude", "latitude"], get_radius=10)
+layer1 = pdk.Layer("ScatterplotLayer", data=df_rio, get_position=["longitude", "latitude"], get_radius='valor')
 
 layer2 = pdk.Layer("ColumnLayer", data=df_rio, get_position=["longitude", "latitude"], radius=200, opacity=0.5)
 
-deck = pdk.Deck(initial_view_state=rio_initial_view, map_style='road', layers=[layer1, layer2])
+deck = pdk.Deck(initial_view_state=rio_initial_view, layers=[layer1])
 st.header("Mapa com PyDeck")
 st.pydeck_chart(deck)
 
