@@ -100,7 +100,12 @@ horario = st.time_input("Horário:", value="09:00")
 if horario:
     st.write(f"Horário digitado: {horario}")
 
+
 st.header("Cores")
 cor = st.color_picker("Cor:", value="#000000")
 if cor:
     st.write(f"Cor: {cor}")
+    st.markdown(f"<div style='background-color: {cor}; \
+                width: 100%; height: 80px; border-radius: 10px;'>\
+                </div>", 
+                unsafe_allow_html=True)
