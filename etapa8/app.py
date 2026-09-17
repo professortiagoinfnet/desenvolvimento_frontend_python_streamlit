@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 st.title("Container")
@@ -62,3 +63,49 @@ with st.sidebar:
     preco = st.text_input("Preço Máximo:")
     st.write(f"Categoria: {categoria}")
     st.write(f"Preço: {preco}")
+
+
+Y2 = np.exp(X)
+df = pd.DataFrame({"X": X, "Y": Y, "Y2": Y2})
+
+st.title("Colunas")
+
+c1, c2, c3, c4 = st.columns(4)
+
+c1.metric("Média Y", df['Y'].mean())
+c2.metric("Média Y2", df['Y2'].mean())
+c3.metric("Max Y", df['Y'].max())
+c4.metric("Max Y2", df['Y2'].max())
+
+st.header("Colunas Proporcionais")
+esq, dir = st.columns((2, 1))
+esq.line_chart(df, x='X', y='Y')
+dir.line_chart(df, x='X', y='Y2')
+
+st.header("Grid")
+produtos = ['A', 'B', 'C', 'D', 'E', 'F']
+
+for i in range(0, 2):
+    colunas = st.columns(3)
+    for j in range(3):
+        p = i * 3 + j
+        colunas[j].metric("Produto", produtos[p])
+
+
+st.title("Tabs")
+meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun']
+vendas = [10, 30, 15, 2, 5, 6]
+df = pd.DataFrame({'Mes': meses, 'Venda': vendas})
+print(df)
+
+tab1, tab2, tab3 = st.tabs(['Resumo', 'Gráficos', 'Dados'])
+
+with tab1:
+    st.metric("Total", df['Venda'].sum())
+    st.metric("Média", df['Venda'].mean())
+
+with tab2:
+    st.line_chart(df, x="Mes", y="Venda")
+
+with tab3:
+    st.dataframe(df)

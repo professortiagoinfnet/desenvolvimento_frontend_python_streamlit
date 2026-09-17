@@ -1,0 +1,11 @@
+[theme]
+base = "dark"
+
+primaryColor = "#FFFF00"
+backgroundColor = "#FF0000"
+secondaryBackgroundColor = "#1F2937"
+textColor = "#FF00FF"
+font = "times"
+
+[theme.sidebar]
+backgroundColor = "#FFFFFF"
